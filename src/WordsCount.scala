@@ -9,7 +9,16 @@ object WordsCount extends App{
   val wordsLower = words.map(x=>x.toLowerCase())
   val wordsMap = wordsLower.map(x=> (x,1))
   val wordsCount = wordsMap.reduceByKey((x,y) => (x+y))
-  wordsCount.collect.foreach(println)
+
+
+  //FOR USING sortByKey, we have to convert the value to key and key to value
+  /*val reversedTouple = wordsCount.map(x=> (x._2, x._1))
+  val sortedResults = reversedTouple.sortByKey(false)   //false means it will be in descending order
+  val finalResult = sortedResults.map(x=>(x._2,x._1))*/
+
+  //We can use sortBy(col name) instead of using sortByKey
+  val finalResult = wordsCount.sortBy(x=>x._2,false)
+  finalResult.collect.foreach(println)
 
   //THIS WILL KEEP THE TERMINAL LIVE, SO WE WILL BE ABLE TO SEE THE DAG
   // scala.io.StdIn.readLine()
