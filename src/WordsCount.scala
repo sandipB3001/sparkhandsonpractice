@@ -6,6 +6,6 @@ object WordsCount extends App{
   val words = textInput.flatMap(x => x.split(" "))
   val wordsMap = words.map(x=> (x,1))
   val wordsCount = wordsMap.reduceByKey((x,y) => (x+y))
-  //hello world
+
   wordsCount.collect.foreach(println)
 }
